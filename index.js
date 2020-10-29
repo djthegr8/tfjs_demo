@@ -67,7 +67,7 @@ async function train() {
             onEpochEnd: async (epoch, logs) => {
                 if (epoch == 49) {
                     console.log("Training over. You are good to go");
-                    echo("Training is over, Start Predicting now!");
+                    alert("Training is over, Start Predicting now!");
                 }
             },
         },
