@@ -54,20 +54,26 @@ async function train() {
     const optimizer = tf.train.adam(0.0001);
     // Specifying the loss as the categorical cross-entropy
     model.compile({ optimizer: optimizer, loss: "categoricalCrossentropy" });
+    // Alerting the User that Training is starting, and to see the Console.
+    alert("Training started, check the console for details");
     // Initializing loss to zero
     let loss = 0;
     // Fitting the model on the images in the dataset for 50 epochs while printing the loss every time
     model.fit(dataset.xs, dataset.ys, {
         epochs: 50,
         callbacks: {
+            // Uncomment if you want loss for every image. Disabled to prevent Console flooding
+            /*
             onBatchEnd: async (batch, logs) => {
                 loss = logs.loss.toFixed(5);
                 console.log("LOSS: " + loss);
-            },
+            },*/
+            // Prints the loss every epoch
             onEpochEnd: async (epoch, logs) => {
+                console.log(```Epoch ${epoch}: Loss: ${logs.loss.toFixed(5)}```);
                 if (epoch == 49) {
                     console.log("Training over. You are good to go");
-                    alert("Training is over, Start Predicting now!");
+                    alert("Training is over, Start Predicting now!\nRun the command model.save(\"downloads://model\") to save the weights for later use!");
                 }
             },
         },
