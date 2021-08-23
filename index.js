@@ -70,7 +70,7 @@ async function train() {
             },*/
             // Prints the loss every epoch
             onEpochEnd: async (epoch, logs) => {
-                console.log(```Epoch ${epoch}: Loss: ${logs.loss}```);
+                console.log(epoch + ':' + logs.loss);
                 if (epoch == 49) {
                     console.log("Training over. You are good to go");
                     alert("Training is over, Start Predicting now!\nRun the command model.save(\"downloads://model\") to save the weights for later use!");
